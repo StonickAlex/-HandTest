@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персональный расклад по ладони</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+
+<body>
+    <div class="mystical-bg"></div>
+    <div class="stars"></div>
+    <!-- Декоративные SVG-рамки и символы -->
+    <div class="decorative-top">
+        <svg width="100" height="60" viewBox="0 0 100 60"><path d="M10,50 Q50,10 90,50" stroke="#bfaaff" stroke-width="2" fill="none"/></svg>
+        <svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" stroke="#ffe066" stroke-width="2" fill="none"/></svg>
+    </div>
+    <main class="container">
+        <!-- Шаг 0: Описание и инструкция -->
+        <section id="step0" class="step active">
+            <div class="intro-section">
+                <h1 class="main-title">Магия линий судьбы</h1>
+                <p class="subtitle">Добро пожаловать в мистический онлайн-сервис хиромантии!<br>Здесь ты сможешь узнать тайны своей судьбы по линиям на ладони.<br>Загрузи фото ладони — и мы откроем завесу будущего.</p>
+            </div>
+            <section class="instruction-section">
+                <h2>Как сделать фото ладони?</h2>
+                <ul>
+                    <li>Используй хорошее освещение, чтобы линии были чётко видны.</li>
+                    <li>Держи ладонь открытой, без украшений и тени.</li>
+                    <li>Фотографируй основную (рабочую) руку.</li>
+                    <li>Избегай размытости и бликов.</li>
+                </ul>
+            </section>
+            <button id="startBtn" class="mystical-btn primary" style="margin-top:32px;">
+                <span>Начать</span>
+                <div class="btn-glow"></div>
+            </button>
+        </section>
+        <!-- Шаг 1: Форма -->
+        <section id="step1" class="step">
+            <div class="header-section">
+                <h2 class="main-title">Хочешь узнать свой<br>персональный расклад<br>по ладони?</h2>
+                <p class="subtitle">Бесплатный онлайн-анализ будущего на основе<br>твоей даты рождения и линий на ладони</p>
+            </div>
+            <form id="userForm" class="mystical-form">
+                <div class="form-group">
+                    <label for="name">Твоё имя</label>
+                    <input type="text" id="name" required placeholder="Введи своё имя">
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения</label>
+                    <input type="date" id="birthdate" required>
+                </div>
+                <button type="submit" class="mystical-btn primary">
+                    <span>Продолжить</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </form>
+        </section>
+        <!-- Шаг 2: Загрузка фото -->
+        <section id="step2" class="step">
+            <div class="header-section">
+                <h2 class="step-title">Загрузи фото своей ладони</h2>
+                <p class="step-subtitle">Мы проанализируем линии и откроем тайны твоего будущего</p>
+            </div>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p>Нажми или перетащи фото ладони сюда</p>
+                    <input type="file" id="coffeePhoto" accept="image/*" hidden>
+                </div>
+                <div id="uploadLoader" class="upload-loader hidden">
+                    <div class="loader-spinner"></div>
+                    <div class="loader-text">Магия загружается...</div>
+                </div>
+                <div id="imagePreview" class="image-preview hidden">
+                    <img id="previewImg" alt="Ладонь">
+                    <button id="analyzeBtn" class="mystical-btn primary">
+                        <span>Узнать расклад</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- Шаг 3: Магический лоадер -->
+        <section id="step3" class="step">
+            <div class="loader-magic-block">
+                <div class="loader-spinner big"></div>
+                <div class="loader-magic-text">Магия анализирует твою ладонь...</div>
+                <div class="loader-magic-sub">Собираем энергию звёзд и расшифровываем линии судьбы</div>
+            </div>
+        </section>
+        <!-- Шаг 4: Результат -->
+        <section id="step4" class="step">
+            <div class="after-reading-block">
+                <h2>Твой мистический символ</h2>
+                <div class="final-palm-container" style="position:relative;display:flex;justify-content:center;align-items:center;margin-bottom:18px;">
+                    <img id="finalPalmImg" alt="Ладонь" style="display:none;width:320px;height:320px;border-radius:18px;box-shadow:0 4px 24px #a259ff22;object-fit:cover;" />
+                </div>
+                <div class="final-reading-text" id="finalReadingText"></div>
+                <div id="finalSymbolBlock" class="final-symbol-block"></div>
+                <div id="finalSymbolDesc" class="final-symbol-desc"></div>
+                <button id="ctaBtn" class="mystical-btn primary" style="margin-top:22px;font-size:20px;max-width:340px;">
+                    <span>Получить полный мистический расклад</span>
+                    <div class="btn-glow"></div>
+                </button>
+                <div class="magic-advice" style="margin-top:18px;">Пусть звёзды ведут тебя по пути судьбы!</div>
+            </div>
+        </section>
+    </main>
+    <div class="decorative-bottom">
+        <svg width="100" height="60" viewBox="0 0 100 60"><path d="M10,10 Q50,50 90,10" stroke="#bfaaff" stroke-width="2" fill="none"/></svg>
+        <svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" stroke="#ffe066" stroke-width="2" fill="none"/></svg>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
