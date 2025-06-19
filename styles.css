@@ -21,16 +21,13 @@
 
 body {
     font-family: 'Inter', 'Cormorant Garamond', serif;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
 }
-
-
-/* Мистический фон */
 
 .mystical-bg {
     position: fixed;
@@ -57,9 +54,6 @@ body {
         transform: translateX(5px) translateY(10px) rotate(-1deg);
     }
 }
-
-
-/* Звёзды */
 
 .stars {
     position: fixed;
@@ -105,9 +99,6 @@ body {
     }
 }
 
-
-/* Контейнер */
-
 .container {
     max-width: 400px;
     margin: 0 auto;
@@ -118,9 +109,6 @@ body {
     justify-content: center;
     position: relative;
 }
-
-
-/* Шаги */
 
 .step {
     position: absolute;
@@ -142,9 +130,6 @@ body {
     pointer-events: all;
     filter: blur(0px);
 }
-
-
-/* Заголовки */
 
 .header-section {
     text-align: center;
@@ -253,9 +238,6 @@ body {
     color: var(--text-secondary);
 }
 
-
-/* Кнопки */
-
 .mystical-btn {
     position: relative;
     width: 100%;
@@ -360,9 +342,6 @@ body {
     margin-bottom: 25px;
 }
 
-
-/* Анализ и трансформация */
-
 .analysis-container {
     text-align: center;
     display: flex;
@@ -398,9 +377,6 @@ body {
     transition: all 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-
-/* Мистические эффекты поверх изображения */
-
 .mystical-overlay {
     position: absolute;
     top: 0;
@@ -415,9 +391,6 @@ body {
 .mystical-overlay.active {
     opacity: 1;
 }
-
-
-/* Энергетические волны */
 
 .energy-waves {
     position: absolute;
@@ -483,18 +456,12 @@ body {
     }
 }
 
-
-/* Плавающие частицы */
-
 .floating-particles {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
-
-
-/* Символ поверх изображения */
 
 .symbol-overlay {
     position: absolute;
@@ -631,15 +598,9 @@ body {
     pointer-events: none;
 }
 
-
-/* Скрытие элементов */
-
 .hidden {
     display: none !important;
 }
-
-
-/* Адаптивность */
 
 @media (max-width: 480px) {
     .container {
@@ -701,9 +662,6 @@ body {
     }
 }
 
-
-/* Анимации появления */
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -721,9 +679,6 @@ body {
     animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-
-/* Пульсация для загрузки */
-
 @keyframes pulse {
     0%,
     100% {
@@ -738,18 +693,12 @@ body {
     animation: pulse 2s ease-in-out infinite;
 }
 
-
-/* Текст и кнопка скрыты изначально в третьем шаге */
-
 #step3 .reading-text,
 #step3 .mystical-btn {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s ease-out;
 }
-
-
-/* Улучшенная анимация частиц */
 
 @keyframes particleFloat {
     0% {
@@ -844,6 +793,7 @@ body {
 }
 
 .instruction-section h2 {
+    padding-left: 10px;
     font-size: 20px;
     margin-bottom: 10px;
     color: var(--accent-color);
@@ -1228,9 +1178,6 @@ body {
     }
 }
 
-
-/* 1. Кастомизация input[type=date] для iOS и мобильных */
-
 input[type="date"] {
     appearance: none;
     -webkit-appearance: none;
@@ -1282,9 +1229,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         min-height: 48px;
     }
 }
-
-
-/* 2. Адаптивность основных блоков */
 
 @media (max-width: 600px) {
     .container {
